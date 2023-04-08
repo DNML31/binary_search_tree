@@ -1,3 +1,13 @@
+module Comparable
+  def greater?(value_a, value_b)
+    if value_a.value > value_b.value
+      puts "#{value_a.value} is greater."
+    else
+      puts "#{value_b.value} is greater."
+    end
+  end
+end
+
 class Node
   include Comparable
 
@@ -12,24 +22,18 @@ class Node
 end
 
 
-module Comparable
-  def greater?(value_a, value_b)
-    if value_a.value > value_b.value
-      puts "#{value_a.value} is greater."
-    else
-      puts "#{value_b.value} is greater."
-    end
-  end
-end
 
 
 
 
 class Tree
+  attr_accessor :root
+  def initialize(array)
+    
+  end
 
+  def build_tree(array)
+
+  end
 end
 
-dan = Node.new(10)
-steve = Node.new(6)
-
-puts dan.greater?(dan, steve)
