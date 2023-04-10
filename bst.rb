@@ -21,11 +21,6 @@ class Node
 
 end
 
-
-
-
-
-
 class Tree
   attr_accessor :root
   def initialize(array)
@@ -33,30 +28,26 @@ class Tree
 
   end
 
-  def build_tree(array)
-    array.sort!.uniq
+  def build_tree(array, first, last)
+    array.sort!.uniq # sort and remove duplicates
 
-    # first = 0
-    # last = array.length - 1
-    # mid = (first + last) / 2
+    if first > last
+      return nil
+    end
 
-    first = Node.new(array[0]) 
-    puts first.value
-    last = Node.new(array[array.length - 1])
-    puts last.value
-    mid = Node.new(array[(0 + array.length - 1) / 2])
-    puts mid.value
+    mid = (first + last) / 2
+    mid_node = Node.new(array[mid])
 
-    # values < mid become left sub array
-    # values > mid become right sub array
+    build_tree(array, first, mid - 1)
+    build_tree(array, mid + 1, last)
 
-    # do these steps recursively
-
-    # need to construct a balanced binary tree of Nodes
-    # needs to return root node
+    return mid_node.value
   end
 
 end
 
-tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-puts tree.build_tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+
+array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+ 
+tree = Tree.new(array)
+puts tree.build_tree(array, 0, array.length - 1)
