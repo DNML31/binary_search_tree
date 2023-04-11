@@ -25,12 +25,12 @@ class Tree
   attr_accessor :root
   def initialize(array)
     @array = array
-
+    @root = build_tree(array, 0, array.length - 1)
   end
 
   def build_tree(array, first, last)
     array.sort!.uniq # sort and remove duplicates
-
+  
     if first > last
       return nil
     end
@@ -44,10 +44,31 @@ class Tree
     return mid_node.value
   end
 
+  def insert(value)
+
+    if value == @root
+      puts "can't have duplicate value"
+    end
+
+    if value < @root
+      # find root of left subtree...
+      # go down left subtree
+    else
+      # find root of right subtree
+      # go down right subtree
+    end
+
+  end
+
 end
 
 
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
- 
+# 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 tree = Tree.new(array)
-puts tree.build_tree(array, 0, array.length - 1)
+# create a Tree object with the given array
+
+tree.build_tree(array, 0, array.length - 1)
+
+puts tree.insert(7)
+
