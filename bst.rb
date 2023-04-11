@@ -28,6 +28,12 @@ class Tree
     @root = build_tree(array, 0, array.length - 1)
   end
 
+  def pretty_print(node = @root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end
+
   def build_tree(array, first = 0, last = array.length - 1)
 
     if first > last
@@ -44,44 +50,35 @@ class Tree
     # didn't work with mid_node.value because that returns '8', not the Node obj
   end
 
-  def insert(value, root)
+  def insert(value, root = @root)
     if root == nil
       root = Node.new(value)
     end
 
-    if value == root
+    if value == root.value
       puts "can't have duplicate values"
     end
 
-    if value < root
+    if value < root.value
       insert(value, root.left)
-      # find root of left subtree...
-      # go down left subtree
-    elsif value > root
+
+    elsif value > root.value
       insert(value, root.right)
-      # find root of right subtree
-      # go down right subtree
+
     end
   end
 
-  def pretty_print(node = @root, prefix = '', is_left = true)
-    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
-    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-  end
 
 end
 
 
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-# 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
+# 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345 
+# if it is sorted and no duplicates
+
 tree = Tree.new(array)
-puts tree.root
-
-tree.build_tree(array)
+my_bst = tree.build_tree(array)
+tree.insert(50, my_bst)
+# call stack too deep
 tree.pretty_print
-
-# tree.build_tree(array)
-
-# puts tree.insert(6, array)
 
