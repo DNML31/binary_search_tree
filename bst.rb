@@ -50,32 +50,62 @@ class Tree
   end
 
   def insert(value, root = @root)
+
+    # case root
+    # when value == root then return nil
+    # when nil
+    #   @root = Node.new(value)
+    #   return
+    # when root.value > value
+    #   root = root.left
+    #   insert(value)
+    # when root.value < value
+    #   root = root.right
+    #   insert(value)
+    # else
+    #   return
+    # end
+
+    if @root == nil
+      @root = Node.new(value)
+    end
+
     if value == @root.value
       return nil
     end
 
-    if @root.value == nil
-      @root = Node.new(value)
+    if value < @root.value
+      if @root.value.nil?
+        @root.value = Node.new(value)
+      else
+        @root = @root.left
+      end
+
+    elsif value > @root.value
+
+      if @root.value.nil?
+        @root.value = Node.new(value)
+      else
+        @root = @root.right
+      end
+      
     end
 
-    # determine which branch to traverse down by comparing value and root.value
-    if value < @root.value
-      @root.value.nil? ? @root.value = Node.new(value) : insert(value, @root.left.value)
-    else
-      @root.value.nil? ? @root.value = Node.new(value) : insert(value, @root.right.value)
-    end
+    insert(value, root = @root)
+
   end
 
 end
 
 
-array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-# 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345 
+# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+# 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
+
+array = [1,2,4]
 
 tree = Tree.new(array)
 tree.build_tree(array)
-tree.insert(2, tree)
+tree.insert(3)
 
 tree.pretty_print
-
