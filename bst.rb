@@ -47,27 +47,24 @@ class Tree
     mid_node.right = build_tree(array, mid + 1, last)
 
     return mid_node
-    # didn't work with mid_node.value because that returns '8', not the Node obj
   end
 
   def insert(value, root = @root)
-    if root == nil
-      root = Node.new(value)
+    if value == @root.value
+      return nil
     end
 
-    if value == root.value
-      puts "can't have duplicate values"
+    if @root.value == nil
+      @root = Node.new(value)
     end
 
-    if value < root.value
-      insert(value, root.left)
-
-    elsif value > root.value
-      insert(value, root.right)
-
+    # determine which branch to traverse down by comparing value and root.value
+    if value < @root.value
+      @root.value.nil? ? @root.value = Node.new(value) : insert(value, @root.left.value)
+    else
+      @root.value.nil? ? @root.value = Node.new(value) : insert(value, @root.right.value)
     end
   end
-
 
 end
 
@@ -77,8 +74,8 @@ array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # if it is sorted and no duplicates
 
 tree = Tree.new(array)
-my_bst = tree.build_tree(array)
-tree.insert(50, my_bst)
-# call stack too deep
+tree.build_tree(array)
+tree.insert(2, tree)
+
 tree.pretty_print
 
