@@ -60,43 +60,39 @@ class Tree
       insert(value, root.right)
     end
 
-    # case @root
-    # when @root.value == value then puts "duplicate"
-    # when root.nil?
-    #   @root = Node.new(value)
-    # when @root.value > value
-    #   insert(value, root.left)
-    # when @root.value < value
-    #   insert(value, root.right)
-    # else
-    #   return
-    # end
-
-    # if root.nil? 
-    #   @root = Node.new(value)
-    # end
-
-    # case value
-    # when value == root then print "duplicate"
-    # when value < root
-    #   insert(value, root.left)
-    # when value > root
-    #   insert(value, root.right)
-    # end
-
   end
 
+  def delete(value, root = @root)
+
+    # case value
+    # when root.value == value && root.left.nil? && root.right.nil?
+    #   root.value = nil
+    # end
+
+    while root.value != value do
+      root = root.left
+      delete(value, root.left)
+      root = root.right
+      delete(value, root.right)
+    end
+
+    if value == root.value
+      root.value = nil
+    end
+
+  end
 end
 
 
-array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-# array = [1]
+array = [1,3]
 
 tree = Tree.new(array)
 tree.build_tree(array)
-tree.insert(2)
-
+tree.pretty_print
+# tree.insert(2)
+tree.delete(1)
 tree.pretty_print
