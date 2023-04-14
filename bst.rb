@@ -64,21 +64,18 @@ class Tree
 
   def delete(value, root = @root)
 
-    # case value
-    # when root.value == value && root.left.nil? && root.right.nil?
-    #   root.value = nil
-    # end
-
-    while root.value != value do
-      root = root.left
-      delete(value, root.left)
-      root = root.right
-      delete(value, root.right)
-    end
-
-    if value == root.value
+    if root == nil
+      root.value
+    elsif value == root.value
       root.value = nil
+    elsif value < root.value
+      delete(value, root.left)
+    elsif value > root.value
+      delete(value, root.right)
+    else
+
     end
+
 
   end
 end
@@ -88,11 +85,11 @@ end
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-array = [1,3]
+array = [1,2]
 
 tree = Tree.new(array)
 tree.build_tree(array)
 tree.pretty_print
 # tree.insert(2)
-tree.delete(1)
+tree.delete(2)
 tree.pretty_print
