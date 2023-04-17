@@ -99,40 +99,61 @@ class Tree
   end
 
   def level_order(root = @root, queue = [], array = [])
-    # keep a reference of a node, add to queue.
-    # before a node is printed to an array, queue its children before continuing.
-    # print/queue-children of the next item in the queue
+  # 1. add ROOT to QUEUE
 
-    # discover a node => add to queue
-    # visit a node => add to array, then discover child nodes
-    current = root
-    queue.push(current.value) unless current.value.nil?
+  # 2. add CHILDREN to QUEUE
+  # 3. print ROOT to ARRAY
+  # 4. delete ROOT from QUEUE
+  # 5. QUEUE[0] = ROOT
+  # 6. start again from step 2 / if QUEUE has nothing, break loop
 
-    if !current.left.nil?
-      queue.push(current.left.value)
+    if root
+      queue.push(root.value)
     end
 
-    if !current.right.nil?
-      queue.push(current.right.value)
+    if root.left.value
+      queue.push(root.left.value)
+    end
+
+    if root.right.value
+      queue.push(root.right.value)
     end
 
     array.push(queue[0])
-    queue.shift
+    root = queue.shift # shift removes and returns value
+    # current.value = queue[0]
+    # print queue
+    print array
 
-    if queue.any?
-      level_order()
+    level_order(root.left, queue, array)
+    level_order(root.right, queue, array)
 
-    puts array
+
+
+    # current = root
+    # queue.push(current.value) unless current.value.nil?
+
+    # if !current.left.nil?
+    #   queue.push(current.left.value)
+    # end
+    # if !current.right.nil?
+    #   queue.push(current.right.value)
+    # end
+    # array.push(queue[0])
+    # queue.shift
+    # if queue.any?
+    #   level_order()
+    # puts array
 
   end
 end
 
 
-array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-# array = [0,1,2,7,5,4,3,10]
+array = [0,1,2]
 
 tree = Tree.new(array)
 tree.build_tree(array)
@@ -140,4 +161,4 @@ tree.build_tree(array)
 # puts tree.find(6345)
 tree.level_order
 
-# tree.pretty_print
+tree.pretty_print
