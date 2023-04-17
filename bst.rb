@@ -98,9 +98,33 @@ class Tree
     end
   end
 
+  def level_order(root = @root, queue = [], array = [])
+    # keep a reference of a node, add to queue.
+    # before a node is printed to an array, queue its children before continuing.
+    # print/queue-children of the next item in the queue
 
+    # discover a node => add to queue
+    # visit a node => add to array, then discover child nodes
+    current = root
+    queue.push(current.value) unless current.value.nil?
 
+    if !current.left.nil?
+      queue.push(current.left.value)
+    end
 
+    if !current.right.nil?
+      queue.push(current.right.value)
+    end
+
+    array.push(queue[0])
+    queue.shift
+
+    if queue.any?
+      level_order()
+
+    puts array
+
+  end
 end
 
 
@@ -113,6 +137,7 @@ array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
-# tree.delete(0)
-puts tree.find(63445)
+# puts tree.find(6345)
+tree.level_order
+
 # tree.pretty_print
