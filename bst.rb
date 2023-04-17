@@ -63,33 +63,56 @@ class Tree
   end
 
   def delete(value, root = @root)
-
-    if root == nil
-      root.value
-    elsif value == root.value
-      root.value = nil
+    if root.nil?
+      root
     elsif value < root.value
       delete(value, root.left)
+
     elsif value > root.value
       delete(value, root.right)
+
+    elsif root.value == value
+      root.value = nil
+
     else
+
 
     end
 
+    # helper methods?
+    # if a root has one child, and that child is the one to delete, then
+    # root.left (or right) = nil.
 
   end
+
+  def find(value, root = @root)
+    puts root
+    if root == nil
+      puts "value doesn't exist"
+    elsif root == value
+      root
+    elsif value < root.value
+      find(value, root.left)
+    elsif value > root.value
+      find(value, root.right)
+    end
+  end
+
+
+
+
 end
 
 
-# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-array = [1,2]
+# array = [0,1,2,7,5,4,3,10]
 
 tree = Tree.new(array)
 tree.build_tree(array)
-tree.pretty_print
-# tree.insert(2)
-tree.delete(2)
-tree.pretty_print
+# tree.insert(124)
+# tree.delete(0)
+puts tree.find(63445)
+# tree.pretty_print
