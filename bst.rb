@@ -107,44 +107,28 @@ class Tree
 
   # 5. start again from step 2 / if QUEUE has nothing, break loop
 
-    if root
-      queue.push(root.value)
+    loop do
+      array.push(root.value)
+      if root.left
+        queue.push(root.left.value)
+        level_order(root.left, queue, array)
+      end
+
+      if root.right
+        queue.push(root.right.value) 
+        level_order(root.right, queue, array)
+      end
+
+      queue.shift
+      
+      break if queue.none?
     end
 
-    if root.left.value
-      queue.push(root.left.value)
-    end
 
-    if root.right.value
-      queue.push(root.right.value)
-    end
-
-    array.push(queue[0])
-    root = queue.shift # shift removes and returns value
-    # current.value = queue[0]
-    # print queue
     print array
 
-    level_order(root.left, queue, array)
-    level_order(root.right, queue, array)
-
-
-
-    # current = root
-    # queue.push(current.value) unless current.value.nil?
-
-    # if !current.left.nil?
-    #   queue.push(current.left.value)
-    # end
-    # if !current.right.nil?
-    #   queue.push(current.right.value)
-    # end
-    # array.push(queue[0])
-    # queue.shift
-    # if queue.any?
-    #   level_order()
-    # puts array
-
+    # level_order(root.left, queue, array)
+    # level_order(root.right, queue, array)
   end
 end
 
@@ -161,4 +145,4 @@ tree.build_tree(array)
 # puts tree.find(6345)
 tree.level_order
 
-tree.pretty_print
+# tree.pretty_print
