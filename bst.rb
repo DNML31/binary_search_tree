@@ -107,7 +107,7 @@ class Tree
 
   # 5. start again from step 2 / if QUEUE has nothing, break loop
 
-    loop do
+    # loop do
       array.push(root.value)
       if root.left
         queue.push(root.left.value)
@@ -120,9 +120,9 @@ class Tree
       end
 
       queue.shift
-      
-      break if queue.none?
-    end
+
+    #   break if queue.none?
+    # end
 
 
     print array
@@ -137,7 +137,7 @@ end
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-array = [0,1,2]
+array = [0,1,2,3,4,5]
 
 tree = Tree.new(array)
 tree.build_tree(array)
