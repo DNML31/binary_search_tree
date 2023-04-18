@@ -101,11 +101,11 @@ class Tree
   def level_order(root = @root, queue = [], array = [])
   # 1. add ROOT to QUEUE
 
-  # 2. add CHILDREN to QUEUE
-  # 3. print ROOT to ARRAY
-  # 4. delete ROOT from QUEUE
-  # 5. QUEUE[0] = ROOT
-  # 6. start again from step 2 / if QUEUE has nothing, break loop
+  # 2. print QUEUE[0] (ROOT) to ARRAY
+  # 3. add QUEUE[0]'s CHILDREN to QUEUE
+  # 4. delete QUEUE[0]
+
+  # 5. start again from step 2 / if QUEUE has nothing, break loop
 
     if root
       queue.push(root.value)
