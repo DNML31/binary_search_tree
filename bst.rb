@@ -63,22 +63,25 @@ class Tree
   end
 
   def delete(value, root = @root)
-    if root.nil?
-      root
-    elsif value < root.value
-      delete(value, root.left)
+
+    return root if root.nil?
+
+    if value < root.value
+      root.left = delete(value, root.left)
 
     elsif value > root.value
-      delete(value, root.right)
-
-    elsif root.value == value
-      root.value = nil
+      root.right = delete(value, root.right)
 
     else
+      # case 1 no child
+      return root.right if root.left.nil?
+      return root.left if root.right.nil?
 
-
+      # case 2 one child
+      
+      # case 3 two children
     end
-
+    root
     # helper methods?
     # if a root has one child, and that child is the one to delete, then
     # root.left (or right) = nil.
@@ -100,35 +103,25 @@ class Tree
 
   def level_order(root = @root, queue = [], array = [])
   # 1. add ROOT to QUEUE
-
-  # 2. print QUEUE[0] (ROOT) to ARRAY
+  # 2. print QUEUE[0] to ARRAY
   # 3. add QUEUE[0]'s CHILDREN to QUEUE
   # 4. delete QUEUE[0]
-
   # 5. start again from step 2 / if QUEUE has nothing, break loop
 
-    # loop do
-      array.push(root.value)
-      if root.left
-        queue.push(root.left.value)
-        level_order(root.left, queue, array)
-      end
+    array.push(root.value)
+    if root.left
+      queue.push(root.left.value)
+      level_order(root.left, queue, array)
+    end
+    if root.right
+      queue.push(root.right.value) 
+      level_order(root.right, queue, array)
+    end
 
-      if root.right
-        queue.push(root.right.value) 
-        level_order(root.right, queue, array)
-      end
+    queue.shift
 
-      queue.shift
+    print "#{array}\n"
 
-    #   break if queue.none?
-    # end
-
-
-    print array
-
-    # level_order(root.left, queue, array)
-    # level_order(root.right, queue, array)
   end
 end
 
@@ -143,6 +136,7 @@ tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(6345)
-tree.level_order
+# tree.level_order
+tree.delete(5)
 
-# tree.pretty_print
+tree.pretty_print
