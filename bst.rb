@@ -78,13 +78,20 @@ class Tree
       return root.left if root.right.nil?
 
       # case 2 one child
-      
+      if root.left.nil?
+        temp = root
+        root = root.right
+        temp = nil
+      elsif root.right.nil?
+        temp = root
+        root = root.left
+        temp = nil
+      end
       # case 3 two children
+      
     end
+
     root
-    # helper methods?
-    # if a root has one child, and that child is the one to delete, then
-    # root.left (or right) = nil.
 
   end
 
@@ -130,13 +137,13 @@ end
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-array = [0,1,2,3,4,5]
+array = [0,1,2,3,4,5,6,7,8,9]
 
 tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(6345)
 # tree.level_order
-tree.delete(5)
+tree.delete(2)
 
 tree.pretty_print
