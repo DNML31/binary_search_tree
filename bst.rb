@@ -67,7 +67,7 @@ class Tree
     while current != nil && current.left != nil
       current = current.left
     end
-    puts current.value
+    current.value
   end
 
   def delete(value, root = @root)
@@ -94,7 +94,9 @@ class Tree
         temp = nil
       end
       # case 3 - two children
-
+      temp = smallest_node()
+      root.value = temp
+      root.right = delete(temp, root.right)
 
     end
 
@@ -150,7 +152,7 @@ tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(8)
-# tree.delete(324)
+tree.delete(63)
 # tree.smallest_node
 
 tree.pretty_print
