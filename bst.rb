@@ -93,6 +93,7 @@ class Tree
         root = root.left
         temp = nil
       end
+
       # case 3 - two children
       temp = smallest_node()
       root.value = temp
@@ -152,7 +153,7 @@ tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(8)
-tree.delete(63)
+tree.delete(67)
 # tree.smallest_node
 
 tree.pretty_print
