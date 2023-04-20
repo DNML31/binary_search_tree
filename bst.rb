@@ -62,22 +62,28 @@ class Tree
 
   end
 
+  def smallest_node(root = @root.right)
+    current = root
+    while current != nil && current.left != nil
+      current = current.left
+    end
+    puts current.value
+  end
+
   def delete(value, root = @root)
 
     return root if root.nil?
 
     if value < root.value
       root.left = delete(value, root.left)
-
     elsif value > root.value
       root.right = delete(value, root.right)
-
     else
-      # case 1 no child
+      # case 1 - no child
       return root.right if root.left.nil?
       return root.left if root.right.nil?
 
-      # case 2 one child
+      # case 2 - one child
       if root.left.nil?
         temp = root
         root = root.right
@@ -87,8 +93,9 @@ class Tree
         root = root.left
         temp = nil
       end
-      # case 3 two children
-      
+      # case 3 - two children
+
+
     end
 
     root
@@ -133,17 +140,17 @@ class Tree
 end
 
 
-# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-array = [0,1,2,3,4,5,6,7,8,9]
+# array = [0,1,2,3,4,5,6,7,8,9]
 
 tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
-# puts tree.find(6345)
-# tree.level_order
-tree.delete(2)
+# puts tree.find(8)
+# tree.delete(324)
+# tree.smallest_node
 
 tree.pretty_print
