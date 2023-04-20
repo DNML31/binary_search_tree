@@ -95,7 +95,7 @@ class Tree
       end
 
       # case 3 - two children
-      temp = smallest_node()
+      temp = smallest_node(root.right)
       root.value = temp
       root.right = delete(temp, root.right)
 
@@ -153,7 +153,7 @@ tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(8)
-tree.delete(67)
+tree.delete(4)
 # tree.smallest_node
 
 tree.pretty_print
