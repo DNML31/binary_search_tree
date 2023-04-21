@@ -126,19 +126,24 @@ class Tree
   # 5. start again from step 2 / if QUEUE has nothing, break loop
 
     array.push(root.value)
+    
     if root.left
       queue.push(root.left.value)
       level_order(root.left, queue, array)
+    else
+      return root
     end
+
     if root.right
       queue.push(root.right.value) 
       level_order(root.right, queue, array)
+    else
+      return root
     end
 
     queue.shift
 
     print "#{array}\n"
-
   end
 end
 
@@ -147,13 +152,13 @@ array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-# array = [0,1,2,3,4,5,6,7,8,9]
+# array = [0,1,2,3,4]
 
 tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(8)
-tree.delete(4)
-# tree.smallest_node
+# tree.delete(4)
+tree.level_order
 
 tree.pretty_print
