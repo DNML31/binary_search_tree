@@ -119,25 +119,18 @@ class Tree
   end
 
   def level_order(root = @root, queue = [], array = [])
-    if !root.nil?
-      queue.push(root)
-    else
-      return
+    if !root.nil? && !queue.any?(root)
+      queue.push(root.value)
     end
+    # print queue
+    queue.push(root.left.value) if !root.left.nil?
+    queue.push(root.right.value) if !root.right.nil?
 
-    if queue.any?
-      array.push(queue[0].value)
-      queue.push(queue[0].left.value)
-      queue.push(queue[0].right.value)
-    end
+    array.push(queue.shift)
 
-    until queue.none?
-      array.push(queue.shift)
-    end
-      # array.push(queue.shift)
+    level_order(queue[0], queue, array)
 
-
-    print array
+    print array if queue.none?
   end
 
 
