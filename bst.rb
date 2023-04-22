@@ -119,40 +119,35 @@ class Tree
   end
 
   def level_order(root = @root, queue = [], array = [])
-  # 1. add ROOT to QUEUE
-  # 2. print QUEUE[0] to ARRAY
-  # 3. add QUEUE[0]'s CHILDREN to QUEUE
-  # 4. delete QUEUE[0]
-  # 5. start again from step 2 / if QUEUE has nothing, break loop
-
-    array.push(root.value)
-    
-    if root.left
-      queue.push(root.left.value)
-      level_order(root.left, queue, array)
+    if !root.nil?
+      queue.push(root)
     else
-      return root
+      return
     end
 
-    if root.right
-      queue.push(root.right.value) 
-      level_order(root.right, queue, array)
-    else
-      return root
+    if queue.any?
+      queue.push(queue[0].left.value)
+      queue.push(queue[0].right.value)
+      array.push(queue[0].value)
     end
 
-    queue.shift
+    until queue.none?
+      array.push(queue.shift)
+    end
+      # array.push(queue.shift)
 
-    print "#{array}\n"
+    print array
   end
+
+
 end
 
 
-array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-# array = [0,1,2,3,4]
+array = [0,1,2,3,4]
 
 tree = Tree.new(array)
 tree.build_tree(array)
@@ -161,4 +156,4 @@ tree.build_tree(array)
 # tree.delete(4)
 tree.level_order
 
-tree.pretty_print
+# tree.pretty_print
