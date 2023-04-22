@@ -126,15 +126,16 @@ class Tree
     end
 
     if queue.any?
+      array.push(queue[0].value)
       queue.push(queue[0].left.value)
       queue.push(queue[0].right.value)
-      array.push(queue[0].value)
     end
 
     until queue.none?
       array.push(queue.shift)
     end
       # array.push(queue.shift)
+
 
     print array
   end
