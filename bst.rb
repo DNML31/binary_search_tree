@@ -168,14 +168,28 @@ class Tree
     result.flatten
   end
 
-end
-# inorder - L - root - R - 0,1,2,3,4,5,6
+  def inorder(root = @root, array = [])
+    # inorder - L - root - R - 0,1,2,3,4,5,6
+    if root.nil?
+      return
+    else
+      inorder(root.left, array)
+      array.push(root.value)
+      inorder(root.right, array)
+    end
 
-# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+    result = []
+    result << array
+    result.flatten
+  end
+
+end
+
+array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-array = [0,1,2,3,4,5,6]
+# array = [0,1,2,3,4,5,6]
 
 tree = Tree.new(array)
 tree.build_tree(array)
@@ -185,5 +199,6 @@ tree.build_tree(array)
 # tree.level_order
 print tree.preorder
 print tree.postorder
+print tree.inorder
 
 # tree.pretty_print
