@@ -120,28 +120,31 @@ class Tree
 
   def level_order(root = @root, queue = [], array = [])
     if !root.nil? && !queue.any?(root)
-      queue.push(root.value)
+      queue.push(root)
+    elsif root.nil?
+      return
     end
     # print queue
-    queue.push(root.left.value) if !root.left.nil?
-    queue.push(root.right.value) if !root.right.nil?
+    queue.push(root.left) if !root.left.nil?
+    queue.push(root.right) if !root.right.nil?
 
-    array.push(queue.shift)
-
-    level_order(queue[0], queue, array)
+    node = queue.shift
+    array.push(node.value)
 
     print array if queue.none?
+    level_order(queue[0], queue, array)
+
   end
 
 
 end
 
 
-# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-array = [0,1,2,3,4]
+# array = [0,1,2,3,4]
 
 tree = Tree.new(array)
 tree.build_tree(array)
