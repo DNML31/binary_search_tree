@@ -136,21 +136,38 @@ class Tree
 
   end
 
+  def preorder(root = @root, array = [], result = [])
+    # preorder - root - L - R - 3,1,0,2,5,4,6
+    if root.nil?
+      return
+    else
+      array.push(root.value)
+    end
+
+    preorder(root.left, array)
+    preorder(root.right, array)
+
+    result << array
+    result.flatten
+    
+  end
 
 end
+# inorder - L - root - R - 0,1,2,3,4,5,6
+# postorder - L - R - root - 0,2,1,4,6,5,3
 
-
-array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
 # if it is sorted and no duplicates
 
-# array = [0,1,2,3,4]
+array = [0,1,2,3,4,5,6]
 
 tree = Tree.new(array)
 tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(8)
 # tree.delete(4)
-tree.level_order
+# tree.level_order
+print tree.preorder
 
 # tree.pretty_print
