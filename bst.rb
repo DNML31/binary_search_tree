@@ -136,7 +136,7 @@ class Tree
 
   end
 
-  def preorder(root = @root, array = [], result = [])
+  def preorder(root = @root, array = [])
     # preorder - root - L - R - 3,1,0,2,5,4,6
     if root.nil?
       return
@@ -146,15 +146,30 @@ class Tree
 
     preorder(root.left, array)
     preorder(root.right, array)
-
+    
+    result = []
     result << array
     result.flatten
+  end
+
+  def postorder(root = @root, array = [])
+    # postorder - L - R - root - 0,2,1,4,6,5,3
+    if root.nil?
+      return
+    else
+      postorder(root.left, array)
+      postorder(root.right, array)
+    end
     
+    array.push(root.value)
+
+    result = []
+    result << array
+    result.flatten
   end
 
 end
 # inorder - L - root - R - 0,1,2,3,4,5,6
-# postorder - L - R - root - 0,2,1,4,6,5,3
 
 # array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 # 1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345
@@ -169,5 +184,6 @@ tree.build_tree(array)
 # tree.delete(4)
 # tree.level_order
 print tree.preorder
+print tree.postorder
 
 # tree.pretty_print
