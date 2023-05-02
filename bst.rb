@@ -185,23 +185,19 @@ class Tree
 
 
   def max(val_one, val_two)
-    val_one > val_two ? return val_one : return val_two
+    val_one > val_two ? val_one : val_two
   end
 
   def height(root = @root)
 
     if root.nil?
-      return 
+      return -1
     end
+
     left_height = height(root.left)
     right_height = height(root.right)
 
-    # root to the deepest possible leaf.
-    # if the height of a tree is 3, then the height of the root is 3.
-    # the deepest node (leaf node) is 0, then going up one level, the height
-    # is 1, and so on until the highest level(root) is 3.
-
-    
+    return (max(left_height, right_height) + 1)
 
   end
 
@@ -223,9 +219,9 @@ tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(8)
 # tree.delete(4)
-# # tree.level_order
+# tree.level_order
 # print tree.preorder
 # print tree.postorder
 # print tree.inorder
-
-tree.pretty_print
+puts tree.height
+# tree.pretty_print
