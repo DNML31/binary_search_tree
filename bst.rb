@@ -184,9 +184,9 @@ class Tree
   end
 
 
-  def max(val_one, val_two)
-    val_one > val_two ? val_one : val_two
-  end
+  # def max(val_one, val_two)
+  #   val_one > val_two ? val_one : val_two
+  # end
 
   def height(root = @root)
 
@@ -197,13 +197,15 @@ class Tree
     left_height = height(root.left)
     right_height = height(root.right)
 
-    return (max(left_height, right_height) + 1)
+    # return (max(left_height, right_height) + 1)
+    return ([left_height, right_height].max + 1)
 
   end
 
 
-  def depth
+  def depth(root = @root, value)
   # depth is calculated from traversal from root to the NODE.
+
   end
 
 end
