@@ -183,6 +183,33 @@ class Tree
     result.flatten
   end
 
+
+  def max(val_one, val_two)
+    val_one > val_two ? return val_one : return val_two
+  end
+
+  def height(root = @root)
+
+    if root.nil?
+      return 
+    end
+    left_height = height(root.left)
+    right_height = height(root.right)
+
+    # root to the deepest possible leaf.
+    # if the height of a tree is 3, then the height of the root is 3.
+    # the deepest node (leaf node) is 0, then going up one level, the height
+    # is 1, and so on until the highest level(root) is 3.
+
+    
+
+  end
+
+
+  def depth
+  # depth is calculated from traversal from root to the NODE.
+  end
+
 end
 
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
@@ -196,9 +223,9 @@ tree.build_tree(array)
 # tree.insert(124)
 # puts tree.find(8)
 # tree.delete(4)
-# tree.level_order
-print tree.preorder
-print tree.postorder
-print tree.inorder
+# # tree.level_order
+# print tree.preorder
+# print tree.postorder
+# print tree.inorder
 
-# tree.pretty_print
+tree.pretty_print
